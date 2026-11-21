@@ -46,3 +46,4 @@ ac_add_options --disable-strip
 ac_add_options --disable-parental-controls
 ac_add_options --disable-synth-speechd
 ac_add_options --disable-gpsd
+ac_add_options --disable-accessibility
