@@ -1,4 +1,4 @@
-# Basilisk for Haiku x86_64, step 1: GTK3 (through Xlibe), system libraries.
+# Basilisk for Haiku x86_64: native toolkit (cairo-haiku), system libraries.
 # Based on mozconfigs/linux/x86_64/gtk3_unofficial_branding_gcc.mozconfig.
 # Other agents: copy this and override MOZ_OBJDIR.
 
@@ -10,10 +10,9 @@ export PYTHON3=/boot/system/bin/python3.12
 export CC=gcc
 export CXX=g++
 
-export BASILISK_VERSION=1
 
 ac_add_options --enable-application=basilisk
-ac_add_options --enable-default-toolkit=cairo-gtk3
+ac_add_options --enable-default-toolkit=cairo-haiku
 ac_add_options --enable-optimize="-O2 -w"
 ac_add_options --disable-debug
 ac_add_options --disable-tests
@@ -27,6 +26,7 @@ ac_add_options --with-system-nspr
 ac_add_options --with-system-nss
 ac_add_options --with-system-zlib
 ac_add_options --with-system-bz2
+ac_add_options --with-system-ffi
 ac_add_options --with-system-jpeg
 ac_add_options --disable-libjpeg-turbo
 
