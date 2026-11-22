@@ -72,10 +72,10 @@ BUILD_PREREQUIRES="
 
 BUILD()
 {
-	cp packaging/haiku/mozconfig-haiku .mozconfig 2>/dev/null \
-		|| cp ../mozconfig-haiku .mozconfig
+	# mozconfig-haiku is in the top of the Basilisk Haiku tree.
+	cp mozconfig-haiku .mozconfig
 	echo "mk_add_options MOZ_OBJDIR=$sourceDir/obj" >> .mozconfig
-	echo "mk_add_options MOZ_MAKE_FLAGS=-j$jobArgs" >> .mozconfig
+	echo "mk_add_options MOZ_MAKE_FLAGS=$jobArgs" >> .mozconfig
 	echo "ac_add_options --enable-strip" >> .mozconfig
 	export MOZCONFIG=$sourceDir/.mozconfig
 	./mach build
