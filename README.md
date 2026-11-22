@@ -29,6 +29,8 @@ Of the **114** files UXP's Solaris port had to change (the places a new OS needs
 | Native UI (`widget/haiku`, gfx platform) | **compiles** on Haiku (not linked yet): app shell, windows, painting, clipboard, file picker, keyboard; native control look (BControlLook), drag and drop, image clipboard, file filters, multiple screens, basic IME |
 | Media, networking, toolkit | **compile** on Haiku (not linked yet): all media decoders, audio through the Media Kit (BSoundPlayer; plays a test tone in the VM), network status from BNetworkRoster, app startup, toolkit components |
 | Layout, DOM, parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet) |
+| Haiku integration | written, compiles: Command-key shortcuts, Haiku notifications, downloads typed with BEOS:TYPE and META:url, default-browser setting, Tracker icons, single launch, printing via BPrintJob, Noto fonts |
+| Media | VP8/VP9/AV1/Opus bundled; H.264/AAC through Haiku's system FFmpeg (libraries load in the VM); WebGL through OSMesa (software) |
 | The browser as a whole | every area compiles on its own; the merged full build (`haiku-all`) is compiling, not linked yet |
 
 ## Branches
