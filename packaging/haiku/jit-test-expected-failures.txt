@@ -1,0 +1,7 @@
+# jit-tests that fail the same way in all modes with UXP's engine (stale
+# tests, not Haiku-specific); seen on Haiku x86_64 with the standalone shell.
+basic/bug1147216.js
+basic/eval-introduction-principals.js
+basic/exception-column-number.js
+basic/function-tosource-getset.js
+basic/statement-after-return.js
