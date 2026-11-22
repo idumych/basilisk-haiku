@@ -316,7 +316,12 @@ pref("browser.download.loglevel", "Error");
 pref("browser.download.saveLinkAsFilenameTimeout", 4000);
 
 pref("browser.download.useDownloadDir", false);
+#ifdef MOZ_WIDGET_HAIKU
+// Save to the Desktop by default, like WebPositive.
+pref("browser.download.folderList", 0);
+#else
 pref("browser.download.folderList", 1);
+#endif
 pref("browser.download.manager.addToRecentDocs", true);
 pref("browser.download.manager.resumeOnWakeDelay", 10000);
 
