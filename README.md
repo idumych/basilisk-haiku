@@ -17,7 +17,7 @@ Basilisk rendering a local test page on Haiku R1/beta6 (22 November 2026): Unico
 ![Basilisk on Haiku rendering a test page](docs/screenshots/test-page-2026-11-22.png)
 
 <!-- haiku-progress:begin -->
-![Basilisk on Haiku: 7 of 11 milestones](docs/progress-7-11-20261122014105.svg)
+![Basilisk on Haiku: 8 of 11 milestones](docs/progress-8-11-20261122014521.svg)
 
 Milestones towards a working browser, ticked only with verified evidence ([`tools/milestones.txt`](tools/milestones.txt)):
 
@@ -26,9 +26,9 @@ Milestones towards a working browser, ticked only with verified evidence ([`tool
 - [x] the JavaScript engine runs and passes its tests (js shell: 6,684 of 6,735 jit-test runs pass, 0 unexpected)
 - [x] the merged full build compiles without errors (haiku-all build in the VM: every file compiles, 0 compile errors (link errors only))
 - [x] libxul links (full haiku-all build in the VM succeeds: libxul.so (89 MB) and the basilisk binary)
-- [x] Basilisk starts and stays running (smoke test: the app stays up until killed (docs/screenshots/first-window-2026-11-22.png))
+- [x] Basilisk starts and stays running (smoke test: the app stays up until killed (smoke test))
 - [x] a browser window appears and draws (smoke test screenshot: menu bar, tab strip, address bar and toolbar drawn natively)
-- [ ] a local web page renders correctly
+- [x] a local web page renders correctly (smoke test page: Unicode text, form controls, scrollbar, PNG, JavaScript (docs/screenshots/test-page-2026-11-22.png))
 - [ ] an HTTPS site loads
 - [ ] an .hpkg of the real build installs and passes the package checks
 - [ ] the release test plan passes on Haiku R1/beta6
