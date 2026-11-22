@@ -518,7 +518,7 @@
              context="toolbar-context-menu"
              collapsed="true">
 
-#if defined(MOZ_WIDGET_GTK)
+#if defined(MOZ_WIDGET_GTK) || defined(MOZ_WIDGET_HAIKU)
       <hbox id="private-browsing-indicator"
             skipintoolbarset="true"/>
 #endif
@@ -563,7 +563,7 @@
         </menupopup>
       </toolbarbutton>
 
-#if !defined(MOZ_WIDGET_GTK)
+#if !defined(MOZ_WIDGET_GTK) && !defined(MOZ_WIDGET_HAIKU)
       <hbox class="private-browsing-indicator" skipintoolbarset="true"/>
 #endif
 #ifdef MOZ_CAN_DRAW_IN_TITLEBAR
