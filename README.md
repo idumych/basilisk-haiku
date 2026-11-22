@@ -17,7 +17,7 @@ Basilisk on Haiku R1/beta6 (22 November 2026), loading https://www.haiku-os.org.
 ![Basilisk on Haiku showing haiku-os.org over HTTPS](docs/screenshots/haiku-os-org-2026-11-22.png)
 
 <!-- haiku-progress:begin -->
-![Basilisk on Haiku: 8 of 11 milestones](docs/progress-8-11-20261122014521.svg)
+![Basilisk on Haiku: 9 of 11 milestones](docs/progress-9-11-20261122014636.svg)
 
 Milestones towards a working browser, ticked only with verified evidence ([`tools/milestones.txt`](tools/milestones.txt)):
 
@@ -29,7 +29,7 @@ Milestones towards a working browser, ticked only with verified evidence ([`tool
 - [x] Basilisk starts and stays running (smoke test: the app stays up until killed (smoke test))
 - [x] a browser window appears and draws (smoke test screenshot: menu bar, tab strip, address bar and toolbar drawn natively)
 - [x] a local web page renders correctly (smoke test page: Unicode text, form controls, scrollbar, PNG, JavaScript (docs/screenshots/test-page-2026-11-22.png))
-- [ ] an HTTPS site loads
+- [x] an HTTPS site loads (https://www.haiku-os.org loads with a valid certificate (docs/screenshots/haiku-os-org-2026-11-22.png))
 - [ ] an .hpkg of the real build installs and passes the package checks
 - [ ] the release test plan passes on Haiku R1/beta6
 
