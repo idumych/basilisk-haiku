@@ -30,11 +30,19 @@ mozglue/misc/TimeStamp_posix.cpp). Full build runs in the VM at
 ## VM status
 
 - configure: OK
-- export: running
-- compile: mfbt, mozglue, memory, xpcom compile (verified per directory before integration)
+- export: OK (`make install-manifests` + export tier)
+- compile: run 1 got ~18 min into the compile tier; only error was
+  printingui/unixshared missing nsIPrintDialogService.h (fixed on haiku-all).
+  Run 2 (`-k`, collect all errors) in progress.
 - libxul link: not reached yet
 - basilisk binary: not reached yet
 
+## Fixed on haiku-all during integration
+
+- config/recurse.mk: nss -> in-tree nspr dependency only with MOZ_BUILD_NSPR
+- toolkit/library: link FT2_LIBS for the haiku toolkit
+- widget/moz.build: export nsIPrintDialogService.h for haiku
+
 ## Current blocking errors
 
-(none yet)
+(none known; run 2 in progress)
