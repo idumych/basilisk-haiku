@@ -12,6 +12,10 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 
 ## Progress
 
+First Basilisk window on Haiku R1/beta6 (22 November 2026). The page area is still empty, and a profile error is being fixed:
+
+![First Basilisk window on Haiku](docs/screenshots/first-window-2026-11-22.png)
+
 <!-- haiku-progress:begin -->
 ![Basilisk on Haiku: 5 of 11 milestones](docs/progress-5-11-20261122013347.svg)
 

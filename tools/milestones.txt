@@ -5,8 +5,8 @@ x|every area compiles on its own|per-area objdirs in the VM: js, xpcom, ipc, wid
 x|the JavaScript engine runs and passes its tests|js shell: 6,684 of 6,735 jit-test runs pass, 0 unexpected
 x|the merged full build compiles without errors|haiku-all build in the VM: every file compiles, 0 compile errors (link errors only)
 x|libxul links|full haiku-all build in the VM succeeds: libxul.so (89 MB) and the basilisk binary
- |Basilisk starts and stays running|
- |a browser window appears and draws|
+x|Basilisk starts and stays running|smoke test: the app stays up until killed (docs/screenshots/first-window-2026-11-22.png)
+x|a browser window appears and draws|smoke test screenshot: menu bar, tab strip, address bar and toolbar drawn natively
  |a local web page renders correctly|
  |an HTTPS site loads|
  |an .hpkg of the real build installs and passes the package checks|
