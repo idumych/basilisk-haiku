@@ -1,0 +1,37 @@
+name			basilisk
+version			@VERSION@-@REVISION@
+architecture		x86_64
+summary			"Basilisk web browser (unofficial community port)"
+description		"Basilisk is a XUL-based web browser built on the Unified XUL Platform (UXP). This is an unofficial community port to Haiku, not supported by the Basilisk developers; please report problems to the Haiku port, not upstream."
+packager		"Basilisk for Haiku community port"
+vendor			"Basilisk for Haiku (unofficial community port)"
+copyrights		{
+	"Basilisk-Dev and contributors"
+	"Mozilla Foundation and contributors"
+}
+licenses		{
+	"MPL v2.0"
+}
+urls			{
+	"https://www.basilisk-browser.org/"
+}
+
+provides		{
+	basilisk = @VERSION@
+	app:Basilisk = @VERSION@
+}
+
+requires		{
+	haiku >= r1~beta6
+	nspr
+	nss
+	libevent
+	libffi
+	icu74
+	libvpx
+	fontconfig
+	freetype
+	zlib
+	bzip2
+	libjpeg_turbo
+}
