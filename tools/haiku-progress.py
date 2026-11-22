@@ -15,7 +15,7 @@ import fcntl, os, re, subprocess, sys, time
 
 TOP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UXP = os.path.join(TOP, "platform")
-BRANCHES = ["haiku-config", "haiku-js", "haiku-xpcom", "haiku-ipc", "haiku-widget", "haiku-misc"]
+BRANCHES = ["haiku-config", "haiku-js", "haiku-xpcom", "haiku-ipc", "haiku-widget", "haiku-misc", "haiku-all"]
 SOLARIS = r"XP_SOLARIS|SunOS|__sun\b|SOLARIS"
 HAIKU = r"XP_HAIKU|__HAIKU__|MOZ_WIDGET_HAIKU|OS_HAIKU|[Hh]aiku"
 # Replaced by system libraries, not built for Basilisk, or not code.

@@ -33,7 +33,8 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 ## Branches
 
 Work happens on one branch per area, in both repositories:
-`haiku-config`, `haiku-js`, `haiku-xpcom`, `haiku-ipc`, `haiku-widget`, `haiku-misc`.
+`haiku-config`, `haiku-js`, `haiku-xpcom`, `haiku-ipc`, `haiku-widget`, `haiku-misc`,
+and `haiku-all` merges them all for the full build.
 `haiku` is the common base; `master` tracks upstream.
 
 ## Building
