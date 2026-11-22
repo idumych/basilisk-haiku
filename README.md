@@ -23,7 +23,7 @@ Of the **114** files UXP's Solaris port had to change (the places a new OS needs
 | Part | State |
 |---|---|
 | Build system (`configure`, `cairo-haiku` toolkit, system NSPR/NSS) | **configure passes** on Haiku; full build in progress |
-| SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: JIT, asm.js, Intl, js-ctypes; time zone and language from Haiku's locale settings |
+| SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: 6,684 of 6,735 jit-test runs pass (the 15 failures are 5 stale tests, same in every mode); JIT, asm.js, Intl, js-ctypes; time zone and language from Haiku's locale settings |
 | XPCOM, mozglue, memory, mfbt | **compiles** on Haiku (not linked yet): xptcall, file and directory services, memory reporters, Tracker/BRoster for reveal and launch |
 | IPC (Chromium layer) | **compiles** on Haiku (not linked yet): fork/exec child processes, system libevent, Haiku thread names |
 | Native UI (`widget/haiku`, gfx platform) | **compiles** on Haiku (not linked yet): app shell, windows, painting, clipboard, file picker, keyboard; native control look (BControlLook), drag and drop, image clipboard, file filters, multiple screens, basic IME |
