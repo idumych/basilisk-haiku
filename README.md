@@ -23,11 +23,12 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 | Part | State |
 |---|---|
 | Build system (`configure`, `cairo-haiku` toolkit, system NSPR/NSS) | **configure passes** on Haiku; full build in progress |
-| SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: JIT, asm.js, Intl, js-ctypes |
+| SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: JIT, asm.js, Intl, js-ctypes; time zone and language from Haiku's locale settings |
 | XPCOM, mozglue, memory, mfbt | **compiles** on Haiku (not linked yet): xptcall, file and directory services, memory reporters, Tracker/BRoster for reveal and launch |
 | IPC (Chromium layer) | **compiles** on Haiku (not linked yet): fork/exec child processes, system libevent, Haiku thread names |
 | Native UI (`widget/haiku`, gfx platform) | **compiles** on Haiku (not linked yet): app shell, windows, painting, clipboard, file picker, keyboard; native control look (BControlLook) written and compiling; drag and drop, IME still to do |
-| Media, networking, toolkit | ported in source, not compiled yet |
+| Media, networking, toolkit | ported in source, compiling now |
+| Parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet); layout and dom compiling now |
 | The browser as a whole | does not build yet |
 
 ## Branches
