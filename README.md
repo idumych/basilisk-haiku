@@ -13,7 +13,7 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 ## Progress
 
 <!-- haiku-progress:begin -->
-![Haiku support: 37 of 114 files](docs/progress-37-114.svg)
+![Haiku support: 37 of 114 files](docs/progress-37-114-20261122000135.svg)
 
 **37 of 114** platform-specific files in UXP handle Haiku. These are the files UXP's Solaris port had to change, so a new OS needs them too (system-library and unbuilt code excluded). Counted across all `haiku-*` branches by [`tools/haiku-progress.py`](tools/haiku-progress.py) on every commit. It measures source coverage, not whether the browser works: see the status table.
 <!-- haiku-progress:end -->
