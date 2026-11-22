@@ -24,6 +24,8 @@ PROVIDES="
 	basilisk = $portVersion
 	app:Basilisk = $portVersion
 	"
+# Optional at run time (dlopen, enables WebGL): mesa / lib:libOSMesa.
+# HaikuPorts recipes have no "recommends", so it is not listed here.
 REQUIRES="
 	haiku >= r1~beta6
 	lib:libbz2

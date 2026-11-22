@@ -2,7 +2,7 @@ name			basilisk
 version			@VERSION@-@REVISION@
 architecture		x86_64
 summary			"Basilisk web browser (unofficial community port)"
-description		"Basilisk is a XUL-based web browser built on the Unified XUL Platform (UXP). This is an unofficial community port to Haiku, not supported by the Basilisk developers; please report problems to the Haiku port, not upstream."
+description		"Basilisk is a XUL-based web browser built on the Unified XUL Platform (UXP). This is an unofficial community port to Haiku, not supported by the Basilisk developers; please report problems to the Haiku port, not upstream. WebGL needs the optional mesa package (libOSMesa), which is loaded at run time."
 packager		"Basilisk for Haiku community port"
 vendor			"Basilisk for Haiku (unofficial community port)"
 copyrights		{
@@ -21,6 +21,9 @@ provides		{
 	app:Basilisk = @VERSION@
 }
 
+# Optional, not required: mesa (libOSMesa.so.8) enables WebGL; it is
+# dlopen()ed at run time. .hpkg has no "recommends", so it is only noted
+# in the description.
 requires		{
 	haiku >= r1~beta6
 	nspr
