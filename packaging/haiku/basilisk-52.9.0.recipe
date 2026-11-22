@@ -25,7 +25,8 @@ PROVIDES="
 	app:Basilisk = $portVersion
 	"
 # Optional at run time (dlopen): mesa / lib:libOSMesa (WebGL), and
-# ffmpeg6 or ffmpeg8 / lib:libavcodec (H.264 and AAC only).
+# ffmpeg6 or ffmpeg8 / lib:libavcodec (H.264 and AAC only), and
+# myspell / myspell_<lang> (spell-check dictionaries).
 # HaikuPorts recipes have no "recommends", so it is not listed here.
 REQUIRES="
 	haiku >= r1~beta6
