@@ -13,7 +13,7 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 ## Progress
 
 <!-- haiku-progress:begin -->
-![Basilisk on Haiku: 4 of 11 milestones](docs/progress-4-11-20261122011945.svg)
+![Basilisk on Haiku: 5 of 11 milestones](docs/progress-5-11-20261122013347.svg)
 
 Milestones towards a working browser, ticked only with verified evidence ([`tools/milestones.txt`](tools/milestones.txt)):
 
@@ -21,7 +21,7 @@ Milestones towards a working browser, ticked only with verified evidence ([`tool
 - [x] every area compiles on its own (per-area objdirs in the VM: js, xpcom, ipc, widget, media/netwerk/toolkit, layout/dom)
 - [x] the JavaScript engine runs and passes its tests (js shell: 6,684 of 6,735 jit-test runs pass, 0 unexpected)
 - [x] the merged full build compiles without errors (haiku-all build in the VM: every file compiles, 0 compile errors (link errors only))
-- [ ] libxul links
+- [x] libxul links (full haiku-all build in the VM succeeds: libxul.so (89 MB) and the basilisk binary)
 - [ ] Basilisk starts and stays running
 - [ ] a browser window appears and draws
 - [ ] a local web page renders correctly
