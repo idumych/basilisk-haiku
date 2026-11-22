@@ -1681,6 +1681,8 @@ function BrowserStop() {
 function BrowserReloadOrDuplicate(aEvent) {
 #ifdef XP_MACOSX
   let metaKeyPressed = aEvent.metaKey;
+#elif defined(MOZ_WIDGET_HAIKU)
+  let metaKeyPressed = aEvent.altKey;
 #else
   let metaKeyPressed = aEvent.ctrlKey;
 #endif

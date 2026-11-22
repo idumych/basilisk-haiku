@@ -885,6 +885,8 @@ var BookmarksEventHandler = {
     let modifKey;
 #ifdef XP_MACOSX
     modifKey = aEvent.metaKey || aEvent.shiftKey;
+#elif defined(MOZ_WIDGET_HAIKU)
+    modifKey = aEvent.altKey || aEvent.shiftKey;
 #else
     modifKey = aEvent.ctrlKey || aEvent.shiftKey;
 #endif
