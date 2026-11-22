@@ -21,6 +21,8 @@ Optional packages, used when installed:
 - `pkgman install mesa` for WebGL (software rendering)
 - `pkgman install ffmpeg6` (or `ffmpeg8`) for H.264 video and AAC audio;
   VP8, VP9, AV1 and Opus play without it
+- `pkgman install myspell` (English) or `myspell_<language>` for spell-check
+  dictionaries
 
 ### Tested
 <!-- One line per platform, from the evidence `os:` lines. Fill in only what was run. -->

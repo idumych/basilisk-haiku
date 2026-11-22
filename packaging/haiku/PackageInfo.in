@@ -23,7 +23,8 @@ provides		{
 
 # Optional, not required (dlopen()ed at run time): mesa (libOSMesa.so.8)
 # enables WebGL; ffmpeg6 or ffmpeg8 (lib:libavcodec, so.60/so.62) enables
-# H.264/AAC (VP8/VP9/AV1/Opus use the bundled decoders). .hpkg has no "recommends", so it is only noted
+# H.264/AAC (VP8/VP9/AV1/Opus use the bundled decoders); myspell or
+# myspell_<lang> (/boot/system/data/hunspell) enables spell checking. .hpkg has no "recommends", so it is only noted
 # in the description.
 requires		{
 	haiku >= r1~beta6
