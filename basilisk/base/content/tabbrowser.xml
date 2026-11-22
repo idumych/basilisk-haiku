@@ -6015,12 +6015,20 @@
       ]]></handler>
 
       <handler event="keydown" group="system"><![CDATA[
+#ifdef MOZ_WIDGET_HAIKU
+        // Alt is the accelerator (Command) key on Haiku.
+        if (event.ctrlKey || event.shiftKey)
+          return;
+#else
         if (event.altKey || event.shiftKey)
           return;
+#endif
 
         let wrongModifiers;
 #ifdef XP_MACOSX
         wrongModifiers = !event.metaKey;
+#elif defined(MOZ_WIDGET_HAIKU)
+        wrongModifiers = !event.altKey || event.metaKey;
 #else
         wrongModifiers = !event.ctrlKey || event.metaKey;
 #endif

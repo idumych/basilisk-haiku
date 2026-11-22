@@ -141,6 +141,11 @@ function whereToOpenLink( e, ignoreButton, ignoreAlt )
 
 #ifdef XP_MACOSX
   var metaKey = meta;
+#elif defined(MOZ_WIDGET_HAIKU)
+  // Alt is the accelerator (Command) key on Haiku, so it can't also mean
+  // "save link".
+  var metaKey = e.altKey;
+  alt = false;
 #else
   var metaKey = ctrl;
 #endif

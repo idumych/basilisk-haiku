@@ -627,6 +627,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
           let url = aUrl;
 #ifdef XP_MACOSX
           let accel = aTriggeringEvent.metaKey;
+#elif defined(MOZ_WIDGET_HAIKU)
+          let accel = aTriggeringEvent.altKey;
 #else
           let accel = aTriggeringEvent.ctrlKey;
 #endif
@@ -1301,6 +1303,8 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
             // But open ctrl/cmd clicks on autocomplete items in a new background tab.
 #ifdef XP_MACOSX
             let modifier = aEvent.metaKey;
+#elif defined(MOZ_WIDGET_HAIKU)
+            let modifier = aEvent.altKey;
 #else
             let modifier = aEvent.ctrlKey;
 #endif
