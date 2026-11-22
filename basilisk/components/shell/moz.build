@@ -36,6 +36,10 @@ elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
     SOURCES += [
         'nsGNOMEShellService.cpp',
     ]
+elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'haiku':
+    SOURCES += [
+        'nsHaikuShellService.cpp',
+    ]
 
 if SOURCES:
     FINAL_LIBRARY = 'browsercomps'
