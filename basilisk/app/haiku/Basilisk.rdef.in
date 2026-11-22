@@ -9,6 +9,9 @@
 
 resource app_signature "application/x-vnd.Basilisk";
 
+/* The name the engine shows in notifications and print jobs. */
+resource(1, "UXP:APP_NAME") "Basilisk";
+
 /* One instance per signature: there is no X11 remoting on Haiku, so an
  * ordinary second launch forwards its arguments to the running instance
  * (B_ARGV_RECEIVED) and exits before touching the profile; dropped files
