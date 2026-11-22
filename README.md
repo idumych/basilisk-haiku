@@ -28,8 +28,8 @@ Of the **114** files UXP's Solaris port had to change (the places a new OS needs
 | IPC (Chromium layer) | **compiles** on Haiku (not linked yet): fork/exec child processes, system libevent, Haiku thread names |
 | Native UI (`widget/haiku`, gfx platform) | **compiles** on Haiku (not linked yet): app shell, windows, painting, clipboard, file picker, keyboard; native control look (BControlLook), drag and drop, image clipboard, file filters, multiple screens, basic IME |
 | Media, networking, toolkit | **compile** on Haiku (not linked yet): all media decoders, audio through the Media Kit (BSoundPlayer; plays a test tone in the VM), network status from BNetworkRoster, app startup, toolkit components |
-| Parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet); layout and dom compiling now |
-| The browser as a whole | does not build yet |
+| Layout, DOM, parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet) |
+| The browser as a whole | every area compiles on its own; the merged full build (`haiku-all`) is compiling, not linked yet |
 
 ## Branches
 
