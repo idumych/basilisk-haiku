@@ -1,0 +1,95 @@
+# DRAFT haikuports-style recipe for the unofficial Basilisk port.
+# Not submitted anywhere; SOURCE_URI and CHECKSUM are placeholders until
+# the Haiku branches are published.
+SUMMARY="A XUL-based web browser built on UXP (unofficial community port)"
+DESCRIPTION="Basilisk is a XUL-based web browser built on the Unified XUL \
+Platform (UXP), a fork of the Mozilla code base from before Quantum.
+
+This is an unofficial community port to Haiku. It is not supported by the \
+Basilisk developers: please report problems to the Haiku port."
+HOMEPAGE="https://www.basilisk-browser.org/"
+COPYRIGHT="Basilisk-Dev and contributors
+	Mozilla Foundation and contributors"
+LICENSE="MPL v2.0"
+REVISION="1"
+# Basilisk with the UXP ('platform') submodule, at the Haiku port's commit.
+SOURCE_URI="git+https://example.invalid/basilisk-haiku.git#COMMIT"
+CHECKSUM_SHA256="SKIP"
+SOURCE_DIR="basilisk"
+
+ARCHITECTURES="!x86_gcc2 ?x86_64"
+SECONDARY_ARCHITECTURES=""
+
+PROVIDES="
+	basilisk = $portVersion
+	app:Basilisk = $portVersion
+	"
+# Optional at run time (dlopen, enables WebGL): mesa / lib:libOSMesa.
+# HaikuPorts recipes have no "recommends", so it is not listed here.
+REQUIRES="
+	haiku >= r1~beta6
+	lib:libbz2
+	lib:libevent_2.1
+	lib:libffi
+	lib:libfontconfig
+	lib:libfreetype
+	lib:libicudata >= 74
+	lib:libicui18n >= 74
+	lib:libicuuc >= 74
+	lib:libjpeg
+	lib:libnspr4
+	lib:libnss3
+	lib:libvpx
+	lib:libz
+	"
+
+BUILD_REQUIRES="
+	haiku_devel >= r1~beta6
+	devel:libbz2
+	devel:libevent
+	devel:libffi
+	devel:libfontconfig
+	devel:libfreetype
+	devel:libicuuc >= 74
+	devel:libjpeg
+	devel:libnspr4
+	devel:libnss3
+	devel:libvpx
+	devel:libz
+	"
+BUILD_PREREQUIRES="
+	cmd:autoconf2.13
+	cmd:gcc
+	cmd:make
+	cmd:perl
+	cmd:pkg_config
+	cmd:python3.12
+	cmd:yasm
+	cmd:zip
+	cmd:unzip
+	cmd:xz
+	cmd:rc
+	cmd:xres
+	"
+
+BUILD()
+{
+	# mozconfig-haiku is in the top of the Basilisk Haiku tree.
+	cp mozconfig-haiku .mozconfig
+	echo "mk_add_options MOZ_OBJDIR=$sourceDir/obj" >> .mozconfig
+	echo "mk_add_options MOZ_MAKE_FLAGS=$jobArgs" >> .mozconfig
+	echo "ac_add_options --enable-strip" >> .mozconfig
+	export MOZCONFIG=$sourceDir/.mozconfig
+	./mach build
+	./mach package
+}
+
+INSTALL()
+{
+	mkdir -p $appsDir/Basilisk
+	cp -a obj/dist/basilisk/. $appsDir/Basilisk/
+	mimeset -f $appsDir/Basilisk/basilisk
+	addAppDeskbarSymlink $appsDir/Basilisk/basilisk Basilisk
+	mkdir -p $binDir
+	ln -s $appsDir/Basilisk/basilisk $binDir/basilisk
+}
