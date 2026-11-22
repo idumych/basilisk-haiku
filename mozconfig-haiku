@@ -42,9 +42,8 @@ ac_add_options --disable-necko-wifi
 ac_add_options --disable-pulseaudio
 ac_add_options --disable-gamepad
 ac_add_options --disable-elf-hack
-ac_add_options --disable-strip
+ac_add_options --enable-strip
 ac_add_options --disable-parental-controls
 ac_add_options --disable-synth-speechd
 ac_add_options --disable-gpsd
 ac_add_options --disable-accessibility
-ac_add_options --disable-av1
