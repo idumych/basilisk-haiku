@@ -42,10 +42,9 @@ and `haiku-all` merges them all for the full build.
 
 ## Building
 
-Target: Haiku R1/beta6 x86_64 with HaikuPorts packages (`gcc`, `haiku_devel`, `python3.12`,
-`autoconf213`, `yasm`, `nspr_devel`, `nss_devel`, `libevent_devel`, `libffi_devel`, `icu74_devel`,
-`libvpx_devel`, `fontconfig_devel`, `freetype_devel`). A `mozconfig-haiku` will be on the
-`haiku-config` branch once the full build configures.
+See [BUILDING-HAIKU.md](https://github.com/idumych/basilisk-haiku/blob/haiku-all/BUILDING-HAIKU.md) on the `haiku-all` branch:
+the HaikuPorts packages to install, the mozconfig, the build commands, and the gotchas we hit
+(Haiku R1/beta6 x86_64; about 16 GB RAM and 10 GB disk). The full browser does not link yet.
 
 Licence: MPL 2.0, as upstream.
 
