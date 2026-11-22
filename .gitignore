@@ -82,3 +82,7 @@ calendar/
 epyrus/
 projects/*
 .codex
+
+# Haiku release pipeline outputs
+/dist/
+*.hpkg

@@ -37,11 +37,27 @@ ln -s ../apps/Basilisk/basilisk "$stage/bin/basilisk"
 mimeset -f "$stage/apps/Basilisk/basilisk" "$stage/apps/Basilisk/basilisk-bin" \
 	2>/dev/null || true
 
+# Description from description.txt (one paragraph; quotes and sed specials escaped).
+description=$(tr '\n' ' ' < "$here/description.txt" | sed -e 's/ *$//' \
+	-e 's/["\\]/\\&/g' -e 's/[&|]/\\&/g')
 sed -e "s/@VERSION@/$version/g" -e "s/@REVISION@/$revision/g" \
+	-e "s|@DESCRIPTION@|$description|" \
 	"$here/PackageInfo.in" > "$stage/.PackageInfo"
 
 mkdir -p "$outdir"
+outdir=$(cd "$outdir" && pwd)
 out="$outdir/basilisk-$version-$revision-x86_64.hpkg"
 rm -f "$out"
 package create -C "$stage" -i "$stage/.PackageInfo" "$out"
 echo "$out"
+
+# Static release checks (beos-app-platforms check-artifact.sh). It runs on the
+# build host and reads the package in a Haiku guest over SSH, so it is skipped
+# when the skill isn't installed (e.g. when this script runs inside Haiku).
+check=${CHECK_ARTIFACT:-$HOME/.claude/skills/beos-app-platforms/scripts/check-artifact.sh}
+if [ -f "$check" ]; then
+	top=$(cd "$here/../.." && pwd)
+	(cd "$top" && sh "$check" hpkg "$out" "${CHECK_HOST:-basilisk-haiku}")
+else
+	echo "build-hpkg.sh: $check not found; run check-artifact.sh hpkg on the host" >&2
+fi
