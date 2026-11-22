@@ -1,0 +1,38 @@
+/*
+ * Haiku application resources for the basilisk binary.
+ * basilisk/app/Makefile.in fills in the @...@ fields, compiles this with
+ * rc and attaches it with xres right after linking (after any strip,
+ * since strip drops resources).
+ *
+ * Basilisk for Haiku is an unofficial community port.
+ */
+
+resource app_signature "application/x-vnd.Basilisk";
+
+/* Gecko keeps one instance per profile through its own remoting, and
+ * Tracker passes files and URLs on the command line. */
+resource app_flags B_MULTIPLE_LAUNCH | B_ARGV_ONLY;
+
+resource app_version {
+	major  = @APP_MAJOR@,
+	middle = @APP_MIDDLE@,
+	minor  = @APP_MINOR@,
+
+	variety = B_APPV_FINAL,
+	internal = 0,
+
+	short_info = "Basilisk @APP_VERSION@",
+	long_info = "Basilisk @APP_VERSION@ web browser. Unofficial community port for Haiku."
+};
+
+resource file_types message {
+	"types" = "text/html",
+	"types" = "application/xhtml+xml",
+	"types" = "text/xml",
+	"types" = "image/svg+xml",
+	"types" = "application/x-vnd.Be.URL.http",
+	"types" = "application/x-vnd.Be.URL.https",
+	"types" = "application/x-vnd.Be.URL.ftp"
+};
+
+#include "icon.rdef"
