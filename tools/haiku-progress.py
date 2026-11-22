@@ -11,7 +11,7 @@ libraries and code that isn't built) and how many of them mention Haiku on any
 Run by the post-commit / post-merge hooks of both repositories (in the
 background, serialised by a lock), or by hand: tools/haiku-progress.py [--no-push]
 """
-import fcntl, os, re, subprocess, sys
+import fcntl, os, re, subprocess, sys, time
 
 TOP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UXP = os.path.join(TOP, "platform")
@@ -64,13 +64,20 @@ def svg(done, total):
 
 def update(push):
     done, total = measure()
-    name = f"progress-{done}-{total}.svg"
-    os.makedirs(os.path.join(TOP, "docs"), exist_ok=True)
-    for f in os.listdir(os.path.join(TOP, "docs")):  # fixed names get stale behind GitHub's image cache
-        if re.fullmatch(r"progress-\d+-\d+\.svg", f) and f != name:
-            os.remove(os.path.join(TOP, "docs", f))
-    with open(os.path.join(TOP, "docs", name), "w") as fh:
-        fh.write(svg(done, total))
+    docs = os.path.join(TOP, "docs")
+    os.makedirs(docs, exist_ok=True)
+    old = [f for f in os.listdir(docs) if re.fullmatch(r"progress-\d+-\d+(-\d{14})?\.svg", f)]
+    current = f"progress-{done}-{total}-"
+    if len(old) == 1 and old[0].startswith(current):
+        name = old[0]  # counts unchanged: keep the image and its name
+    else:
+        # A new name for every new image: GitHub's README image cache keeps a path for
+        # minutes and ignores query strings, so a reused name would show a stale bar.
+        name = current + time.strftime("%Y%m%d%H%M%S", time.gmtime()) + ".svg"
+        for f in old:
+            os.remove(os.path.join(docs, f))
+        with open(os.path.join(docs, name), "w") as fh:
+            fh.write(svg(done, total))
     block = (f"{BEGIN}\n![Haiku support: {done} of {total} files](docs/{name})\n\n"
              f"**{done} of {total}** platform-specific files in UXP handle Haiku. These are the files "
              f"UXP's Solaris port had to change, so a new OS needs them too (system-library and unbuilt "
