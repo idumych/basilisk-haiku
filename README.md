@@ -13,9 +13,23 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 ## Progress
 
 <!-- haiku-progress:begin -->
-![Haiku support: 42 adapted and 71 not needed, of 114 files](docs/progress-42-71-114-20261122003414.svg)
+![Basilisk on Haiku: 3 of 11 milestones](docs/progress-3-11-20261122005557.svg)
 
-Of the **114** files UXP's Solaris port had to change (the places a new OS needs; system-library and unbuilt code excluded), **42** now handle Haiku (bright) and **71** were reviewed and need nothing for Haiku (dim; each has a reason in [SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). Counted across all `haiku-*` branches by [`tools/haiku-progress.py`](tools/haiku-progress.py). It measures source coverage, not whether the browser works: see the status table.
+Milestones towards a working browser, ticked only with verified evidence ([`tools/milestones.txt`](tools/milestones.txt)):
+
+- [x] configure passes on Haiku R1/beta6 (config.status in the VM: OS_ARCH=Haiku, MOZ_WIDGET_TOOLKIT=haiku)
+- [x] every area compiles on its own (per-area objdirs in the VM: js, xpcom, ipc, widget, media/netwerk/toolkit, layout/dom)
+- [x] the JavaScript engine runs and passes its tests (js shell: 6,684 of 6,735 jit-test runs pass, 0 unexpected)
+- [ ] the merged full build compiles without errors
+- [ ] libxul links
+- [ ] Basilisk starts and stays running
+- [ ] a browser window appears and draws
+- [ ] a local web page renders correctly
+- [ ] an HTTPS site loads
+- [ ] an .hpkg of the real build installs and passes the package checks
+- [ ] the release test plan passes on Haiku R1/beta6
+
+Source coverage, for reference: of the 114 files UXP's Solaris port had to change, 42 now handle Haiku and 71 were reviewed and need nothing ([SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). That says the source is adapted, not that the browser works.
 <!-- haiku-progress:end -->
 
 ## Status (November 2026)
