@@ -12,9 +12,9 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 
 ## Progress
 
-Basilisk rendering a local test page on Haiku R1/beta6 (22 November 2026): Unicode text in Noto fonts, native form controls and scrollbar, a PNG image, and JavaScript. It still shows the unofficial "Snake" name; official branding comes next.
+Basilisk on Haiku R1/beta6 (22 November 2026), loading https://www.haiku-os.org. It still shows the unofficial "Snake" name; official branding comes next. A [local test page](docs/screenshots/test-page-2026-11-22.png) also renders correctly: Unicode text, native form controls and scrollbar, images, JavaScript.
 
-![Basilisk on Haiku rendering a test page](docs/screenshots/test-page-2026-11-22.png)
+![Basilisk on Haiku showing haiku-os.org over HTTPS](docs/screenshots/haiku-os-org-2026-11-22.png)
 
 <!-- haiku-progress:begin -->
 ![Basilisk on Haiku: 8 of 11 milestones](docs/progress-8-11-20261122014521.svg)
