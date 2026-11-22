@@ -37,7 +37,7 @@ def ApplicationBranding():
             'document.icns',
             'firefox.icns',
         ]
-    elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
+    elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT'] or CONFIG['MOZ_WIDGET_TOOLKIT'] == 'haiku':
         BRANDING_FILES += [
             'default16.png',
             'default32.png',
