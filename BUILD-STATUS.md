@@ -19,10 +19,22 @@ Run mach with `python3.12 ./mach ...` (the VM's `python3` is 3.14).
   With system NSS, `security/` is skipped; `config/external/nss` provides the
   `nss` library and builds `mozpkix` from the in-tree sources; crmf is dropped (unused).
 
+## Integration (branch `haiku-all`, Basilisk and platform)
+
+`haiku-all` merges haiku-config, haiku-js, haiku-xpcom, haiku-ipc,
+haiku-widget and haiku-misc (one trivial conflict in
+mozglue/misc/TimeStamp_posix.cpp). Full build runs in the VM at
+/boot/home/work/xpcom (src, obj), `./mach build` with MOZ_MAKE_FLAGS=-j10
+(note: top-level `mach` is a sh script; run `./mach`, not `python3.12 ./mach`).
+
 ## VM status
 
-(updated as the build progresses)
+- configure: OK
+- export: running
+- compile: mfbt, mozglue, memory, xpcom compile (verified per directory before integration)
+- libxul link: not reached yet
+- basilisk binary: not reached yet
 
-## First C++ errors by area
+## Current blocking errors
 
 (none yet)
