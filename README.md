@@ -17,7 +17,7 @@ Basilisk on Haiku R1/beta6 (22 November 2026), loading https://www.haiku-os.org.
 ![Basilisk on Haiku showing haiku-os.org over HTTPS](docs/screenshots/haiku-os-org-2026-11-22.png)
 
 <!-- haiku-progress:begin -->
-![Basilisk on Haiku: 9 of 11 milestones](docs/progress-9-11-20261122014636.svg)
+![Basilisk on Haiku: 10 of 11 milestones](docs/progress-10-11-20261122020511.svg)
 
 Milestones towards a working browser, ticked only with verified evidence ([`tools/milestones.txt`](tools/milestones.txt)):
 
@@ -30,7 +30,7 @@ Milestones towards a working browser, ticked only with verified evidence ([`tool
 - [x] a browser window appears and draws (smoke test screenshot: menu bar, tab strip, address bar and toolbar drawn natively)
 - [x] a local web page renders correctly (smoke test page: Unicode text, form controls, scrollbar, PNG, JavaScript (docs/screenshots/test-page-2026-11-22.png))
 - [x] an HTTPS site loads (https://www.haiku-os.org loads with a valid certificate (docs/screenshots/haiku-os-org-2026-11-22.png))
-- [ ] an .hpkg of the real build installs and passes the package checks
+- [x] an .hpkg of the real build installs and passes the package checks (basilisk-52.9.0-1-x86_64.hpkg: check-artifact 19/19; installed in the VM, launches from apps/Basilisk and loads https://www.haiku-os.org)
 - [ ] the release test plan passes on Haiku R1/beta6
 
 Source coverage, for reference: of the 114 files UXP's Solaris port had to change, 42 now handle Haiku and 71 were reviewed and need nothing ([SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). That says the source is adapted, not that the browser works.
