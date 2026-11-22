@@ -39,23 +39,34 @@ def grep_files(repo, pattern, ref, paths):
     return {line.split(":", 1)[1] for line in out.splitlines() if ":" in line}
 
 
+def reviewed_files():
+    """Files the audit (SOLARIS-AUDIT.md on Basilisk haiku-config) found need nothing for Haiku."""
+    text = git(TOP, "show", "haiku-config:SOLARIS-AUDIT.md", check=False)
+    section = text.split("## Nothing needed", 1)[1] if "## Nothing needed" in text else ""
+    section = section.split("\n## ", 1)[0]
+    return {m.group(1).strip() for m in re.finditer(r"^\|\s*([^|]+?)\s*\|", section, re.M)} - {"File", "---"}
+
+
 def measure():
     targets = sorted(grep_files(UXP, SOLARIS, "master", ["."] + [":!" + e for e in EXCLUDE]))
     done = set()
     for b in BRANCHES:
         done |= grep_files(UXP, HAIKU, b, targets) & set(targets)
-    return len(done), len(targets)
+    reviewed = (reviewed_files() & set(targets)) - done
+    return len(done), len(reviewed), len(targets)
 
 
-def svg(done, total):
-    pct = round(100 * done / total) if total else 0
-    w, h, bar = 480, 28, 300
+def svg(done, reviewed, total):
+    pct = round(100 * (done + reviewed) / total) if total else 0
+    w, h, bar = 560, 28, 260
     fill = round(bar * done / total) if total else 0
-    label = f"{done} / {total} files ({pct}%)"
+    fill2 = round(bar * (done + reviewed) / total) if total else 0
+    label = f"{done} adapted + {reviewed} not needed / {total} ({pct}%)"
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" role="img" aria-label="Haiku support: {label}">
 <title>Haiku support: {label}</title>
 <rect width="{w}" height="{h}" rx="5" fill="#2b2b2b"/>
 <rect x="6" y="6" width="{bar}" height="{h-12}" rx="3" fill="#555"/>
+<rect x="6" y="6" width="{fill2}" height="{h-12}" rx="3" fill="#8a7a3a"/>
 <rect x="6" y="6" width="{fill}" height="{h-12}" rx="3" fill="#ffcb00"/>
 <text x="{bar+16}" y="{h/2+5}" font-family="DejaVu Sans,Verdana,sans-serif" font-size="13" fill="#fff">{label}</text>
 </svg>
@@ -63,11 +74,11 @@ def svg(done, total):
 
 
 def update(push):
-    done, total = measure()
+    done, reviewed, total = measure()
     docs = os.path.join(TOP, "docs")
     os.makedirs(docs, exist_ok=True)
-    old = [f for f in os.listdir(docs) if re.fullmatch(r"progress-\d+-\d+(-\d{14})?\.svg", f)]
-    current = f"progress-{done}-{total}-"
+    old = [f for f in os.listdir(docs) if re.fullmatch(r"progress-\d+(-\d+)?-\d+(-\d{14})?\.svg", f)]
+    current = f"progress-{done}-{reviewed}-{total}-"
     if len(old) == 1 and old[0].startswith(current):
         name = old[0]  # counts unchanged: keep the image and its name
     else:
@@ -77,13 +88,14 @@ def update(push):
         for f in old:
             os.remove(os.path.join(docs, f))
         with open(os.path.join(docs, name), "w") as fh:
-            fh.write(svg(done, total))
-    block = (f"{BEGIN}\n![Haiku support: {done} of {total} files](docs/{name})\n\n"
-             f"**{done} of {total}** platform-specific files in UXP handle Haiku. These are the files "
-             f"UXP's Solaris port had to change, so a new OS needs them too (system-library and unbuilt "
-             f"code excluded). Counted across all `haiku-*` branches by "
-             f"[`tools/haiku-progress.py`](tools/haiku-progress.py) on every commit. It measures source "
-             f"coverage, not whether the browser works: see the status table.\n{END}")
+            fh.write(svg(done, reviewed, total))
+    block = (f"{BEGIN}\n![Haiku support: {done} adapted and {reviewed} not needed, of {total} files](docs/{name})\n\n"
+             f"Of the **{total}** files UXP's Solaris port had to change (the places a new OS needs; "
+             f"system-library and unbuilt code excluded), **{done}** now handle Haiku (bright) and "
+             f"**{reviewed}** were reviewed and need nothing for Haiku (dim; each has a reason in "
+             f"[SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). "
+             f"Counted across all `haiku-*` branches by [`tools/haiku-progress.py`](tools/haiku-progress.py). "
+             f"It measures source coverage, not whether the browser works: see the status table.\n{END}")
     text = open(README).read()
     text = re.sub(re.escape(BEGIN) + ".*?" + re.escape(END), lambda m: block, text, flags=re.S)
     open(README, "w").write(text)
