@@ -13,7 +13,8 @@
 # Environment:
 #   VM=basilisk-haiku          ssh host of the VM
 #   VMDIR=~/VMs/basilisk-haiku QEMU VM dir (for screenshots)
-#   APP_NAME=Basilisk          name `hey` uses to quit the app
+#   APP_NAME=<binary name>     name `hey` uses to quit the app: Haiku registers the
+#                              app under its file name (basilisk, not Basilisk)
 #   APP_ARGS=...               default: -profile /boot/home/work/smoke-profile -no-remote
 #   MOZLOG=...                 MOZ_LOG value (default: widget/gfx at level 4)
 #   WAIT_START=25              seconds before the first screenshot
@@ -32,7 +33,8 @@ VMDIR=${VMDIR:-$HOME/VMs/basilisk-haiku}
 QEMUVM=${QEMUVM:-/home/ian/.claude/skills/beos-app-platforms/scripts/qemu-vm.sh}
 APP=${1:-/boot/home/work/xpcom/obj/dist/bin/basilisk}
 OUT=${2:-./smoke-$(date +%Y%m%d-%H%M%S)}
-APP_NAME=${APP_NAME:-Basilisk}
+APP_NAME=${APP_NAME:-$(basename "$APP")}
+PROFILE=$(printf '%s\n' "$APP_ARGS" | sed -n 's/.*-profile \([^ ]*\).*/\1/p')
 APP_ARGS=${APP_ARGS--profile /boot/home/work/smoke-profile -no-remote}
 MOZLOG=${MOZLOG:-Widget:4,WidgetPopup:4,gfx2d:4,nsHaikuWidgets:5,sync}
 WAIT_START=${WAIT_START:-25}
@@ -162,11 +164,11 @@ shot 01-startup
 
 # --- 3. load the test page ------------------------------------------------------
 if [ -z "${NO_PAGE:-}" ]; then
-	# A second invocation hands the URL to the running instance. (Basilisk with
-	# -no-remote can't do that, so open the page in a new tab via -new-tab
-	# without -no-remote, using the same profile.)
-	if [ "$APP_NAME" = Basilisk ]; then
-		vm "cd $SMOKE; '$APP' -profile /boot/home/work/smoke-profile -new-tab file://$SMOKE/test.html >> $SMOKE/app2.log 2>&1 < /dev/null &" || true
+	# A second invocation hands the URL to the running instance. (A Gecko app
+	# started with -no-remote can't do that, so open the page in a new tab via
+	# -new-tab without -no-remote, using the same profile.)
+	if [ -n "$PROFILE" ]; then
+		vm "cd $SMOKE; '$APP' -profile $PROFILE -new-tab file://$SMOKE/test.html >> $SMOKE/app2.log 2>&1 < /dev/null &" || true
 	else
 		vm "cd $SMOKE; '$APP' file://$SMOKE/test.html >> $SMOKE/app2.log 2>&1 < /dev/null &" || true
 	fi
