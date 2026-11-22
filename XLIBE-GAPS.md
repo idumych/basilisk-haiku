@@ -1,5 +1,9 @@
 # Xlibe gaps for the UXP GTK3/X11 backend on Haiku
 
+> **Status: superseded.** The lead chose the native widget/haiku backend
+> (cairo-haiku, no MOZ_X11). The Xlibe work described below was reverted
+> on haiku-widget; this file is kept as a record of why.
+
 ## Blocker: Haiku's GTK3 does not use Xlibe
 
 Checked in the build VM (Haiku R1/beta6, gtk3_devel 3.24.52):
@@ -29,7 +33,7 @@ renderproto.h, ...) is installed. There is no GL/glx.h (Mesa provides GL, EGL an
 `XShmQueryExtension`/`XShmAttach`/`XShmCreateImage` are declared but **not exported**.
 `XQueryExtension` is a stub that returns 0, and `XextAddDisplay` is missing.
 
-## Gaps and what was done (branch haiku-widget, commit 69653cf669)
+## Gaps and what was done (reverted; was on haiku-widget)
 
 | X11 API | Used by | Action on Haiku |
 |---|---|---|
