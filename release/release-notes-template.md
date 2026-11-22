@@ -4,7 +4,7 @@ Basilisk is a XUL-based web browser built on the Unified XUL Platform (UXP).
 This package is an **unofficial community port to Haiku**. It is not made or
 supported by the Basilisk developers: please report problems to the Haiku
 port, not to the Basilisk project. The Basilisk name and branding are used
-with the permission of Basilisk's lead developer: @PERMISSION_LINK@
+with the permission of Basilisk's lead developer: https://discuss.haiku-os.org/t/port-basilisk-browser-to-haiku/16046 (December 2024: permission to use the official Basilisk branding for the Haiku port and to use system libraries instead of the static-library requirements)
 
 ### Downloads
 | Platform | File |
