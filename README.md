@@ -13,9 +13,9 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 ## Progress
 
 <!-- haiku-progress:begin -->
-![Haiku support: 38 of 114 files](docs/progress-38-114-20261122001554.svg)
+![Haiku support: 42 adapted and 71 not needed, of 114 files](docs/progress-42-71-114-20261122003414.svg)
 
-**38 of 114** platform-specific files in UXP handle Haiku. These are the files UXP's Solaris port had to change, so a new OS needs them too (system-library and unbuilt code excluded). Counted across all `haiku-*` branches by [`tools/haiku-progress.py`](tools/haiku-progress.py) on every commit. It measures source coverage, not whether the browser works: see the status table.
+Of the **114** files UXP's Solaris port had to change (the places a new OS needs; system-library and unbuilt code excluded), **42** now handle Haiku (bright) and **71** were reviewed and need nothing for Haiku (dim; each has a reason in [SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). Counted across all `haiku-*` branches by [`tools/haiku-progress.py`](tools/haiku-progress.py). It measures source coverage, not whether the browser works: see the status table.
 <!-- haiku-progress:end -->
 
 ## Status (November 2026)
