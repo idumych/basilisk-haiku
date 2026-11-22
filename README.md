@@ -27,7 +27,7 @@ Of the **114** files UXP's Solaris port had to change (the places a new OS needs
 | XPCOM, mozglue, memory, mfbt | **compiles** on Haiku (not linked yet): xptcall, file and directory services, memory reporters, Tracker/BRoster for reveal and launch |
 | IPC (Chromium layer) | **compiles** on Haiku (not linked yet): fork/exec child processes, system libevent, Haiku thread names |
 | Native UI (`widget/haiku`, gfx platform) | **compiles** on Haiku (not linked yet): app shell, windows, painting, clipboard, file picker, keyboard; native control look (BControlLook), drag and drop, image clipboard, file filters, multiple screens, basic IME |
-| Media, networking, toolkit | ported in source, compiling now |
+| Media, networking, toolkit | **compile** on Haiku (not linked yet): all media decoders, audio through the Media Kit (BSoundPlayer; plays a test tone in the VM), network status from BNetworkRoster, app startup, toolkit components |
 | Parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet); layout and dom compiling now |
 | The browser as a whole | does not build yet |
 
