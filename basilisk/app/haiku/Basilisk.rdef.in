@@ -9,11 +9,15 @@
 
 resource app_signature "application/x-vnd.Basilisk";
 
-/* One instance: there is no X11 remoting on Haiku, so a second launch
- * would find the profile locked. The running instance gets the second
- * launch's arguments (B_ARGV_RECEIVED) and dropped files
- * (B_REFS_RECEIVED) instead; -no-remote/-P use a per-profile signature. */
-resource app_flags B_SINGLE_LAUNCH;
+/* One instance per signature: there is no X11 remoting on Haiku, so an
+ * ordinary second launch forwards its arguments to the running instance
+ * (B_ARGV_RECEIVED) and exits before touching the profile; dropped files
+ * and "Open with" arrive there as B_REFS_RECEIVED. -P/-profile and
+ * -no-remote give the new instance its own signature
+ * (application/x-vnd.Basilisk-<hash> or a unique one), which
+ * B_EXCLUSIVE_LAUNCH lets run next to the default one (B_SINGLE_LAUNCH
+ * would refuse it, being one instance per executable). */
+resource app_flags B_EXCLUSIVE_LAUNCH;
 
 resource app_version {
 	major  = @APP_MAJOR@,
