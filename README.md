@@ -12,10 +12,28 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 
 ## Progress
 
-<!-- haiku-progress:begin -->
-![Haiku support: 37 of 114 files](docs/progress-37-114-20261122000135.svg)
+Basilisk on Haiku R1/beta6 (22 November 2026), loading https://www.haiku-os.org. It still shows the unofficial "Snake" name; official branding comes next. A [local test page](docs/screenshots/test-page-2026-11-22.png) also renders correctly: Unicode text, native form controls and scrollbar, images, JavaScript.
 
-**37 of 114** platform-specific files in UXP handle Haiku. These are the files UXP's Solaris port had to change, so a new OS needs them too (system-library and unbuilt code excluded). Counted across all `haiku-*` branches by [`tools/haiku-progress.py`](tools/haiku-progress.py) on every commit. It measures source coverage, not whether the browser works: see the status table.
+![Basilisk on Haiku showing haiku-os.org over HTTPS](docs/screenshots/haiku-os-org-2026-11-22.png)
+
+<!-- haiku-progress:begin -->
+![Basilisk on Haiku: 10 of 11 milestones](docs/progress-10-11-20261122020511.svg)
+
+Milestones towards a working browser, ticked only with verified evidence ([`tools/milestones.txt`](tools/milestones.txt)):
+
+- [x] configure passes on Haiku R1/beta6 (config.status in the VM: OS_ARCH=Haiku, MOZ_WIDGET_TOOLKIT=haiku)
+- [x] every area compiles on its own (per-area objdirs in the VM: js, xpcom, ipc, widget, media/netwerk/toolkit, layout/dom)
+- [x] the JavaScript engine runs and passes its tests (js shell: 6,684 of 6,735 jit-test runs pass, 0 unexpected)
+- [x] the merged full build compiles without errors (haiku-all build in the VM: every file compiles, 0 compile errors (link errors only))
+- [x] libxul links (full haiku-all build in the VM succeeds: libxul.so (89 MB) and the basilisk binary)
+- [x] Basilisk starts and stays running (smoke test: the app stays up until killed (smoke test))
+- [x] a browser window appears and draws (smoke test screenshot: menu bar, tab strip, address bar and toolbar drawn natively)
+- [x] a local web page renders correctly (smoke test page: Unicode text, form controls, scrollbar, PNG, JavaScript (docs/screenshots/test-page-2026-11-22.png))
+- [x] an HTTPS site loads (https://www.haiku-os.org loads with a valid certificate (docs/screenshots/haiku-os-org-2026-11-22.png))
+- [x] an .hpkg of the real build installs and passes the package checks (basilisk-52.9.0-1-x86_64.hpkg: check-artifact 19/19; installed in the VM, launches from apps/Basilisk and loads https://www.haiku-os.org)
+- [ ] the release test plan passes on Haiku R1/beta6
+
+Source coverage, for reference: of the 114 files UXP's Solaris port had to change, 42 now handle Haiku and 71 were reviewed and need nothing ([SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). That says the source is adapted, not that the browser works.
 <!-- haiku-progress:end -->
 
 ## Status (November 2026)
@@ -23,25 +41,28 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 | Part | State |
 |---|---|
 | Build system (`configure`, `cairo-haiku` toolkit, system NSPR/NSS) | **configure passes** on Haiku; full build in progress |
-| SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: JIT, asm.js, Intl, js-ctypes |
+| SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: 6,684 of 6,735 jit-test runs pass (the 15 failures are 5 stale tests, same in every mode); JIT, asm.js, Intl, js-ctypes; time zone and language from Haiku's locale settings |
 | XPCOM, mozglue, memory, mfbt | **compiles** on Haiku (not linked yet): xptcall, file and directory services, memory reporters, Tracker/BRoster for reveal and launch |
-| IPC (Chromium layer) | ported in source, not compiled yet |
-| Native UI (`widget/haiku`, gfx platform) | written (~5,000 lines, adapted from HaikuPorts' Firefox port), not compiled yet |
-| Media, networking, toolkit | ported in source, not compiled yet |
-| The browser as a whole | does not build yet |
+| IPC (Chromium layer) | **compiles** on Haiku (not linked yet): fork/exec child processes, system libevent, Haiku thread names |
+| Native UI (`widget/haiku`, gfx platform) | **compiles** on Haiku (not linked yet): app shell, windows, painting, clipboard, file picker, keyboard; native control look (BControlLook), drag and drop, image clipboard, file filters, multiple screens, basic IME |
+| Media, networking, toolkit | **compile** on Haiku (not linked yet): all media decoders, audio through the Media Kit (BSoundPlayer; plays a test tone in the VM), network status from BNetworkRoster, app startup, toolkit components |
+| Layout, DOM, parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet) |
+| Haiku integration | written, compiles: Command-key shortcuts, Haiku notifications, downloads typed with BEOS:TYPE and META:url, default-browser setting, Tracker icons, single launch, printing via BPrintJob, Noto fonts |
+| Media | VP8/VP9/AV1/Opus bundled; H.264/AAC through Haiku's system FFmpeg (libraries load in the VM); WebGL through OSMesa (software) |
+| The browser as a whole | every area compiles on its own; the merged full build (`haiku-all`) is compiling, not linked yet |
 
 ## Branches
 
 Work happens on one branch per area, in both repositories:
-`haiku-config`, `haiku-js`, `haiku-xpcom`, `haiku-ipc`, `haiku-widget`, `haiku-misc`.
+`haiku-config`, `haiku-js`, `haiku-xpcom`, `haiku-ipc`, `haiku-widget`, `haiku-misc`,
+and `haiku-all` merges them all for the full build.
 `haiku` is the common base; `master` tracks upstream.
 
 ## Building
 
-Target: Haiku R1/beta6 x86_64 with HaikuPorts packages (`gcc`, `haiku_devel`, `python3.12`,
-`autoconf213`, `yasm`, `nspr_devel`, `nss_devel`, `libevent_devel`, `libffi_devel`, `icu74_devel`,
-`libvpx_devel`, `fontconfig_devel`, `freetype_devel`). A `mozconfig-haiku` will be on the
-`haiku-config` branch once the full build configures.
+See [BUILDING-HAIKU.md](https://github.com/idumych/basilisk-haiku/blob/haiku-all/BUILDING-HAIKU.md) on the `haiku-all` branch:
+the HaikuPorts packages to install, the mozconfig, the build commands, and the gotchas we hit
+(Haiku R1/beta6 x86_64; about 16 GB RAM and 10 GB disk). The full browser does not link yet.
 
 Licence: MPL 2.0, as upstream.
 
