@@ -127,8 +127,10 @@ def update(push):
         print(f"progress updated: {done}/{total} milestones")
     if push:
         refs = ["haiku"] + BRANCHES
-        for repo in (UXP, TOP):
-            r = subprocess.run(["git", "-C", repo, "push", "-q", "github", *refs],
+        # The app repo's GitHub remote is "origin" (upstream Basilisk is "upstream");
+        # the engine repo's GitHub remote is still "github".
+        for repo, remote in ((UXP, "github"), (TOP, "origin")):
+            r = subprocess.run(["git", "-C", repo, "push", "-q", remote, *refs],
                                capture_output=True, text=True)
             if r.returncode:
                 print(f"push failed in {repo}: {r.stderr.strip()}", file=sys.stderr)
