@@ -22,10 +22,12 @@ resource(1, "UXP:APP_NAME") "Basilisk";
  * would refuse it, being one instance per executable). */
 resource app_flags B_EXCLUSIVE_LAUNCH;
 
+/* Literal, so the release tools can read it: keep it equal to
+ * basilisk/config/version.txt (and VERSION in haiku-app.env). */
 resource app_version {
-	major  = @APP_MAJOR@,
-	middle = @APP_MIDDLE@,
-	minor  = @APP_MINOR@,
+	major  = 52,
+	middle = 9,
+	minor  = 0,
 
 	variety = B_APPV_FINAL,
 	internal = 0,
