@@ -32,11 +32,9 @@ requires		{
 	nss
 	libevent
 	libffi
-	icu74
-	libvpx
 	fontconfig
 	freetype
 	zlib
-	bzip2
+	libiconv
 	libjpeg_turbo
 }

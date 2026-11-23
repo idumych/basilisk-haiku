@@ -1,4 +1,4 @@
-# Basilisk for Haiku (work in progress)
+# Basilisk for Haiku
 
 A community port of the [Basilisk](https://www.basilisk-browser.org/) web browser to
 [Haiku](https://www.haiku-os.org/), with a native Haiku user interface (BWindow/BView).
@@ -12,9 +12,10 @@ Basilisk keeps its engine, UXP, in the `platform` submodule. The Haiku changes t
 
 ## Progress
 
-Basilisk on Haiku R1/beta6 (22 November 2026), loading https://www.haiku-os.org. It still shows the unofficial "Snake" name; official branding comes next. A [local test page](docs/screenshots/test-page-2026-11-22.png) also renders correctly: Unicode text, native form controls and scrollbar, images, JavaScript.
-
-![Basilisk on Haiku showing haiku-os.org over HTTPS](docs/screenshots/haiku-os-org-2026-11-22.png)
+Basilisk 52.9.0 runs on Haiku R1/beta6 x86_64 with the official Basilisk branding; see
+[Screenshots](#screenshots) and the [releases](https://github.com/idumych/basilisk-haiku/releases).
+Earlier builds: a [local test page](docs/screenshots/test-page-2026-11-22.png) and
+[haiku-os.org](docs/screenshots/haiku-os-org-2026-11-22.png) under the old unofficial "Snake" name.
 
 <!-- haiku-progress:begin -->
 ![Basilisk on Haiku: 10 of 11 milestones](docs/progress-10-11-20261122020511.svg)
@@ -36,11 +37,28 @@ Milestones towards a working browser, ticked only with verified evidence ([`tool
 Source coverage, for reference: of the 114 files UXP's Solaris port had to change, 42 now handle Haiku and 71 were reviewed and need nothing ([SOLARIS-AUDIT.md](https://github.com/idumych/basilisk-haiku/blob/haiku-config/SOLARIS-AUDIT.md)). That says the source is adapted, not that the browser works.
 <!-- haiku-progress:end -->
 
+## Screenshots
+
+![Basilisk on Haiku showing haiku-os.org over HTTPS](docs/screenshots/haiku-https-haiku-os-org.png)
+
+Basilisk 52.9.0 on Haiku R1/beta6, loading https://www.haiku-os.org over HTTPS.
+
+![The About Basilisk window on Haiku](docs/screenshots/haiku-about-basilisk.png)
+
+The About window with the official Basilisk branding, over the first-run page.
+
+## Install
+
+Haiku R1/beta6 x86_64: download `basilisk-52.9.0-1-x86_64.hpkg` from the
+[releases](https://github.com/idumych/basilisk-haiku/releases) and run
+`pkgman install ./basilisk-52.9.0-1-x86_64.hpkg`. It is an unofficial community port, not
+supported by the Basilisk developers.
+
 ## Status (November 2026)
 
 | Part | State |
 |---|---|
-| Build system (`configure`, `cairo-haiku` toolkit, system NSPR/NSS) | **configure passes** on Haiku; full build in progress |
+| Build system (`configure`, `cairo-haiku` toolkit, system NSPR/NSS) | **builds** on Haiku R1/beta6: the full browser and its `.hpkg` |
 | SpiderMonkey (JS engine) | **builds and runs** on Haiku R1/beta6 x86_64: 6,684 of 6,735 jit-test runs pass (the 15 failures are 5 stale tests, same in every mode); JIT, asm.js, Intl, js-ctypes; time zone and language from Haiku's locale settings |
 | XPCOM, mozglue, memory, mfbt | **compiles** on Haiku (not linked yet): xptcall, file and directory services, memory reporters, Tracker/BRoster for reveal and launch |
 | IPC (Chromium layer) | **compiles** on Haiku (not linked yet): fork/exec child processes, system libevent, Haiku thread names |
@@ -49,7 +67,7 @@ Source coverage, for reference: of the 114 files UXP's Solaris port had to chang
 | Layout, DOM, parser, image, storage, docshell, editor, intl | **compile** on Haiku (not linked yet) |
 | Haiku integration | written, compiles: Command-key shortcuts, Haiku notifications, downloads typed with BEOS:TYPE and META:url, default-browser setting, Tracker icons, single launch, printing via BPrintJob, Noto fonts |
 | Media | VP8/VP9/AV1/Opus bundled; H.264/AAC through Haiku's system FFmpeg (libraries load in the VM); WebGL through OSMesa (software) |
-| The browser as a whole | every area compiles on its own; the merged full build (`haiku-all`) is compiling, not linked yet |
+| The browser as a whole | **runs**: the `haiku-all` build is released as an `.hpkg` (52.9.0); the rows above describe how each area was first brought up |
 
 ## Branches
 
@@ -62,7 +80,7 @@ and `haiku-all` merges them all for the full build.
 
 See [BUILDING-HAIKU.md](https://github.com/idumych/basilisk-haiku/blob/haiku-all/BUILDING-HAIKU.md) on the `haiku-all` branch:
 the HaikuPorts packages to install, the mozconfig, the build commands, and the gotchas we hit
-(Haiku R1/beta6 x86_64; about 16 GB RAM and 10 GB disk). The full browser does not link yet.
+(Haiku R1/beta6 x86_64; about 16 GB RAM and 10 GB disk). The release packages are built from the `haiku-all` branch.
 
 Licence: MPL 2.0, as upstream.
 
